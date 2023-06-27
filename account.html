@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1a90b5bfd3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Document</title>
+</head>
+
+<body class="body account">
+    <nav class="menu">
+        <div class="menu__header">
+            <div class="menu__header__logo">
+                <img src="img/logo.png" class="menu__header__logo__img">
+            </div>
+        </div>
+        <div class="menu__items">
+            <li class="menu__items__item menu__items__item__user short">
+                <div class="menu__items__item__user__logo">
+                    <img src="img/dota.jpg" alt="" class="menu__items__item__user__logo__img">
+                </div>
+                <div class="menu__items__item__user__info">
+                    <span class="menu__items__item__user__info-name">Vezerion</span>
+                    <span class="menu__items__item__user__info-user">incognito</span>
+                </div>
+            </li>
+            <li class="menu__items__item menu__items__item__ankets short screen" data-screen="files">
+                <i class="menu__items__item__ankets__icon fa-regular fa-file"></i>
+                <div class="menu__items__item__ankets__header">Анкеты</div>
+            </li>
+            <li class="menu__items__item menu__items__item__settings short screen" data-screen="settings">
+                <i class="menu__items__item__settings__icon fa-solid fa-gear"></i>
+                <div class="menu__items__item__settings__header">Настройки</div>
+            </li>
+            <li class="menu__items__item menu__items__item__logout short">
+                <i class="menu__items__item__logout__icon fa-solid fa-arrow-right-from-bracket"></i>
+                <div class="menu__items__item__logout__header">Выход</div>
+            </li>
+        </div>
+    </nav>
+    <section class="ankets section screen_active">
+        <div class="ankets__manager">
+            <div class="ankets__manager__navigation">
+                <div class="ankets__upload">
+                    <button class="ankets__upload__choice__button">Создать анкету</button>
+                </div>
+                <div class="ankets__search">
+                    <i class="fa-solid fa-magnifying-glass ankets__search__icon"></i>
+                    <input type="text" class="ankets__search__input" placeholder="поиск анкет">
+                    <button class="ankets__search__button">Найти</button>
+                </div>
+            </div>
+            <div class="ankets__manager__layout"> <!-- big_files -->
+                    <div class="ankets__manager__layout__wrapper ">
+
+                    </div>
+            </div>
+        </div>
+    </section>   
+    <!-- создание анкты -->
+    <!--Тут сделаю создание анкеты и мб чат -->
+    <section class="settings section">
+        <h2 class="settings__header">Изменить данные учетной записи</h2>
+        <form class="settings__form">
+                       
+            <div class="settings__form__item">
+                <label for="name" class="settings__form__item__header">Имя</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="name" name="name" type="text" class="settigns__form__name settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>     
+            </div>
+            <div class="settings__form__item">
+                <label for="surname" class="settings__form__item__header">Фамилия</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="surname" name="surname" type="text" class="settigns__form__surname settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+
+             <div class="settings__form__item">
+                    <label for="country" class="settings__form__item__header">Страна</label>
+                    <div class="settings__form__item__wrapper">
+                        <input data-name="country" name="country" type="text" class="settigns__form__country settings__form__input">
+                        <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>                
+            </div>
+            <div class="settings__form__item">
+                <label for="date_of_birth" class="settings__form__item__header">Дата рождения</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="date_of_birth" name="date_of_birth" type="date" class="settigns__form__date settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+                
+            </div>
+            <div class="settings__form__item">
+                <label for="bio" class="settings__form__item__header">Описание</label>
+                <div class="settings__form__item__wrapper">
+                    <textarea data-name="bio" name="bio" class="settings__form__bio settings__form__input"></textarea>
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+            </div>
+                
+            </div>
+            <div class="settings__form__item">
+                <label for="game_platforms" class="settings__form__item__header">Игровые платформы</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="game_platforms" name="game_platforms" type="text" class="settigns__form__game_platforms settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+            
+            <div class="settings__form__item">
+                <label for="discord_url" class="settings__form__item__header">Дискорд</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="discord_url" name="discord_url" type="text" class="settigns__form__discord_url settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+            <div class="settings__form__item">
+                <label for="platforms_url" class="settings__form__item__header">Ссылки на платформы</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="platforms_url" name="platforms_url" type="text" class="settigns__form__platforms_url settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+                
+            </div>
+            <!-- <div class="settings__form__item">
+                <label for="password" class="settings__form__item__header">Введите ваш новый пароль</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="password" name="password" type="text" class="settigns__form__password settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+                
+            </div>
+            <div class="settings__form__item">
+                <label for="password_confirm" class="settings__form__item__header">Подтвердите ваш пароль</label>
+                <div class="settings__form__item__wrapper">
+                    <input data-name="password_confirm" name="password_confirm" type="text" class="settigns__form__password-confirm settings__form__input">
+                    <i class="fa-solid fa-pen settings__form__change-btn"></i>
+                </div>
+                
+            </div> -->
+            <div class="settings__form__buttons">
+                <button type="submit" class="settings__form__submit-btn">Сохранить</button>
+                <button class="settings__form__cancel-btn">Отмена</button>
+            </div>
+        </form>
+    </section>
+    <div class="modal">
+        <form class="anket__form">
+            <h2 class="anket__header">Создать анкету</h2>
+            <div class="anket__form__item">
+                <label for="game_name" class="anket__form__item__header">Название игры:</label>
+                <div class="anket__form__item__wrapper">
+                    <input data-name="game_name" name="game_name" type="text" class="settigns__form__game_name anket__form__input">
+                </div>     
+            </div>
+            <div class="anket__form__item">
+                <label for="description" class="anket__form__item__header">Описание:</label>
+                <div class="anket__form__item__wrapper">
+                    <textarea data-name="description" name="description" class="settigns__form__description anket__form__input"></textarea>
+                </div>
+
+            <div class="anket__form__item">
+                    <label for="role_play" class="anket__form__item__header">Роль:</label>
+                    <div class="anket__form__item__wrapper">
+                        <input data-name="role_play" name="role_play" type="text" class="settigns__form__role_play anket__form__input">
+                    </div>                
+            </div>
+            <div class="anket__form__item">
+                <label for="statistics" class="anket__form__item__header">Статистика:</label>
+                <div class="anket__form__item__wrapper">
+                    <input data-name="statistics" name="statistics" type="text" class="settigns__form__date anket__form__input">
+                </div>
+                
+            </div>
+            <div class="anket__form__item">
+                <label for="top_skills" class="anket__form__item__header">Лучшие навыки:</label>
+                <div class="anket__form__item__wrapper">
+                    <input data-name="top_skills" name="top_skills" type="text" class="anket__form__top_skills anket__form__input">
+                </div>
+            </div>
+                
+            </div>
+            <div class="anket__form__item">
+                <label for="age_diap" class="anket__form__item__header">Предпочитаемый возраст:</label>
+                <div class="anket__form__item__wrapper">
+                    <input data-name="age_diap" name="age_diap" type="text" class="settigns__form__age_diap anket__form__input">
+                </div>
+            
+            <div class="anket__form__item">
+                <label for="gender_prep" class="anket__form__item__header">Предпочитаемый пол:</label>
+                <div class="anket__form__item__wrapper">
+                    <input data-name="gender_prep" name="gender_prep" type="text" class="settigns__form__gender_prep anket__form__input">
+                </div>
+                            
+            </div>
+
+            <div class="anket__form__buttons">
+                <button type="submit" class="anket__form__submit-btn">Создать</button>
+                <button class="anket__form__cancel-btn">Отмена</button>
+            </div>
+        </form>
+    </div>
+    <!-- НАСТРОЙКИ -->
+
+    <script src="js/checkSession.js"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js
+    "></script>
+    <script src="js/menu.js"></script>
+    <script src="js/showAnkets.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/exit.js"></script>
+    <script src="js/anket_creation.js"></script>    
+    <script src="js/modal.js"></script>
+</body>
+</html>

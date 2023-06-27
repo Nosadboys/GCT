@@ -1,0 +1,133 @@
+.menu
+    display: flex
+    justify-content: space-around
+    align-items: center
+    width: 100%
+    height: 70px
+    padding: 20px
+    background-color: #9e1e9e77
+    color: #fff
+    transition: 1s ease-in-out
+    &__header
+        display: flex
+        justify-content: space-between
+        align-items: center
+        &__logo
+            height: 50px
+            width: 100px
+            &__img
+                height: 100%
+                width: 100%
+    &__button
+        position: absolute
+        left: 76%
+        font-size: 50px
+        text-align: center
+        line-height: 60px
+        top: calc( 50% - 60px )
+        height: 60px
+        width: 60px
+        border-radius: 100%
+        // color: $color_text
+        // background-color: $color_accent_primary
+        cursor: pointer
+        transform: rotateZ(180deg)
+        transition: 1s ease-in-out
+        
+    &__items
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 600px
+        &__item
+            margin-right: 5px
+            margin-left: 5px
+            border: 1px solid
+            padding-left: 10px
+            padding-right: 10px
+            list-style: none
+            display: flex
+            align-items: center
+            height: 55px
+            // color: $color_text
+            &:hover
+                background-color: #cf50cf77
+            &__user
+                border-radius: 25px
+                width: 100%
+                cursor: pointer
+                flex-direction: row-reverse
+                text-align: right
+                &__logo
+                    margin-left: 15px
+                    height: 50px
+                    width: 50px
+                    transition: 1s ease-in-out 0.5s
+                    &__img
+                        border-radius: 100%
+                        height: 100%
+                        width: 100%
+                &__info
+                    display: flex
+                    flex-direction: column
+                    justify-content: space-between
+                    padding-left: 35px
+                    opacity: 1
+                    transition: 1s ease-in-out 0.5s
+                    &-name
+                        font-size: 26px
+                        font-weight: 500
+                    &-user
+                        font-size: 18px
+                        font-weight: 300
+            &__ankets
+                border-radius: 25px
+                width: 100%
+                cursor: pointer
+                &__icon
+                    font-size: 26px
+                    padding-right: 20px
+                &__header
+                    font-size: 20px
+                    opacity: 1
+                    transition: 1s ease-in-out 0.5s
+            &__contacts
+                border-radius: 25px
+                width: 100%
+                cursor: pointer
+                &__icon
+                    font-size: 26px
+                    padding-right: 20px
+                &__header
+                    font-size: 20px
+                    opacity: 1
+                    transition: 1s ease-in-out 0.5s
+            &__settings
+                border-radius: 25px
+                width: 100%
+                cursor: pointer
+                &__icon
+                    font-size: 26px
+                    padding-right: 20px
+                &__header
+                    font-size: 20px
+                    opacity: 1
+                    transition: 1s ease-in-out 0.5s
+            &__logout
+                border-radius: 25px
+                width: 100%
+                cursor: pointer
+                &__icon
+                    font-size: 26px
+                    padding-right: 20px
+                &__header
+                    opacity: 1
+                    font-size: 20px
+                    transition: 1s ease-in-out 0.5s
+            &__theme
+                display: flex
+                justify-content: space-between
+                align-items: center
+                &__icon
+                    padding-right: 20px
+                    cursor: pointer
