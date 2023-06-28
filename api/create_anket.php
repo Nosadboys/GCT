@@ -15,7 +15,7 @@ if (isset($postdata)) {
   $col = count(queryMysql("SELECT anket_id FROM profileankets WHERE user_id = '$user_id'")->fetchAll(PDO::FETCH_BOTH));
   
   
-  if ($col<7){  
+  if ($col<8){  
     
       $anket_id = GenUserID();
       $game_name = sanstr($postdata["game_name"]);  

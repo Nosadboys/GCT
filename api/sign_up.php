@@ -4,13 +4,15 @@
     header("Content-Type: application/json; charset=UTF-8");
      
     if (isset($_SERVER["REQUEST_METHOD"]) == "POST"){
-    $postData = file_get_contents("php://input");
-    echo ($postData);
-    //$json_string = '{"username":"Senya","name":"Сеня","surname":"Зуева","email":"eld.kaz@mail.ru","date_of_birth":"2023-06-08","country":"AX","gender":"M","password":"Vepfaath57","password-confirm":"Vepfaath57"}';
-    $_POST = json_decode($postData, true);
-    //$_POST = json_decode($json_string, true);
-    //echo ($json_string);
-    var_dump( $_POST);}
+      $postData = file_get_contents("php://input");
+      //echo ($postData);
+      //$json_string = '{"username":"Senya","name":"Сеня","surname":"Зуева","email":"eld.kaz@mail.ru","date_of_birth":"2023-06-08","country":"AX","gender":"M","password":"Vepfaath57","password-confirm":"Vepfaath57"}';
+      $_POST = json_decode($postData, true);
+      //$_POST = json_decode($json_string, true);
+      //echo ($json_string);
+      //var_dump( $_POST);
+      //echo json_encode($postData);
+  }
     echo json_last_error_msg();
     json_check(json_last_error());
     
@@ -35,18 +37,18 @@
         $game_platforms =  "game_platforms";
         $discord_url =  "Discord_url";         
         $platforms_url =  "Platforms url";
-        echo 'ok';
+        //echo 'ok';
         if ($username == "" || $pass == "" ){
-          echo 231;
+          //echo 231;
           http_response_code(231);
           die();
         }
         elseif ((queryMysql("SELECT username FROM users WHERE username='$username'")->fetchAll(PDO::FETCH_BOTH))) {
-          echo 233;
+          //echo 233;
           http_response_code(233);
           die();
         }elseif ((queryMysql("SELECT email FROM users WHERE email='$email'")->fetchAll(PDO::FETCH_BOTH))) {
-          echo 234;
+          //echo 234;
           http_response_code(234);
           die();
         }
@@ -58,7 +60,7 @@
               !((preg_match("/[a-z]/", $name) || preg_match("/[A-Z]/", $name)) && !preg_match("/[0-9]/", $name) || preg_match("//", $name)) ||
               !((preg_match("/[a-z]/", $surname) || preg_match("/[A-Z]/", $surname)) && !preg_match("/[0-9]/", $surname) || preg_match("//", $surname)) 
           ){
-              echo 232;
+              //echo 232;
               http_response_code(232);
             die();
           }
@@ -82,14 +84,14 @@
             
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $pass;
-            echo "Otlichno 230";
+            //echo "Otlichno 230";
             http_response_code(230);          
           }
         }
       }
 
     else {    
-      echo 'Ploho 235';
+      //echo 'Ploho 235';
         http_response_code(235);  
       die();
     }

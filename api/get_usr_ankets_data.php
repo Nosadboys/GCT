@@ -1,7 +1,7 @@
 <?php 
     require_once 'param.php';
     header("Content-Type: application/json; charset=UTF-8");
-    //header("Location: account.html");
+    
     session_start();
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -20,32 +20,15 @@
         $ankets = [];
         foreach ($anket_paths as $anket_path) {
             $anket = queryMysql("SELECT * FROM ankets WHERE id  = '$anket_path'")->fetch(PDO::FETCH_ASSOC);
-            $ankets[] = $anket;
+            $userdat = queryMysql("SELECT username, email FROM users WHERE id  = '$user'")->fetch(PDO::FETCH_ASSOC);
+            $profile = queryMysql("SELECT name, surname, country, date_of_birth, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '$user'")->fetch(PDO::FETCH_ASSOC);
+            $ankets[] = array_merge($anket,$profile,$userdat);
         }
-        echo json_encode($ankets);
-
-        
-        die(http_response_code(230));
+        http_response_code(230);
+        echo json_encode($ankets);        
+        die();
     }
     else {
         die(http_response_code(237));
     }
-    
-        // $user_id = $user_id[0];
-
-        //$anket_path = queryMysql("SELECT anket_id FROM profileankets WHERE user_id = '$user'")->fetchColumn(); //fetchAll(PDO::FETCH_ASSOC)
-        //echo json_encode($anket_path);  
-        // $ankets=[];     
-        // foreach ($anket_path as $anket){
-        //     $res = queryMysql("SELECT * FROM ankets WHERE id  = '$anket'")->fetchAll(PDO::FETCH_ASSOC);
-        //     echo json_encode($res); 
-        //     $ankets+=$res;
-        // }
-        // echo json_encode($ankets); 
-        //$output = array("ankets" => $ankets, "profile_info" => $profile_info, "email" => $email); код плох
-        //$ankets = queryMysql("SELECT * FROM ankets WHERE id  = '$anket_path'")->fetchAll(PDO::FETCH_ASSOC);
-        //$profile_info = queryMysql("SELECT * FROM profiles WHERE user_id = '$user'")->fetchAll(PDO::FETCH_ASSOC); Это есть в кукисах
-        //$email = queryMysql("SELECT email FROM users WHERE id  = '$user'")->fetchColumn();
-        //$output = $ankets; //+$profile_info+$email
-        //echo json_encode($output);
 ?>

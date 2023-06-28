@@ -4,9 +4,11 @@
     
     session_start();
     
-    //if($_SERVER["REQUEST_METHOD"] == "GET"){
+    if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("Content-Type: application/json; charset=UTF-8");
-        $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets")->fetchAll(PDO::FETCH_ASSOC);
+        $username = $_SESSION['username']; 
+        $user =  $user_id = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
+        $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets WHERE user_id != '$user'")->fetchAll(PDO::FETCH_ASSOC);
         $res = [];        
         foreach ($anket_prof as $row) {              
             
@@ -17,6 +19,7 @@
             $res[] = array_merge($anket, $profile, $userdat);
             
         }
+        http_response_code(230);
         echo json_encode($res);                
-        //die(http_response_code(230));
-    //}
+        die();
+    }

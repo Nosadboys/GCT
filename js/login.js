@@ -2,7 +2,7 @@ const changeToAuth = document.querySelector('.change_to_auth');
 const changeToReg = document.querySelector('.change_to_reg');
 const authForm = document.querySelector('.auth');
 const regForm = document.querySelector('.registr');
-// const body = document.querySelector('body');
+const body = document.querySelector('body');
 changeToAuth.addEventListener('click', ()=>{
     authForm.classList.remove('inactive');
     regForm.classList.add('inactive');
@@ -26,9 +26,11 @@ function registr(form, url){
             body: dataJson
         }).then((data)=>{                   
             if(data.status == 230) {
-                Cookies(data);
-                signUpForm.reset();
-                window.location.href = 'account.html';
+                alert('Вы успешно прошли регистрацию. Осуществите вход'); //new
+                window.location.href = 'auth.html'; // new
+                Cookies(dataJson);      // fix было data все равно сюда не заходит
+                form.reset();           // мб тут ошибка было signupform поменял на арг функции
+                //window.location.href = 'account.html'; //old
             } else {
                 throw new Error();
             }
@@ -41,7 +43,7 @@ function registr(form, url){
 
 registr(regForm, '../api/sign_up.php');
 
-function Cookies(data) {
+function Cookies(data) { 
     const userData = JSON.parse(data);
     console.log(userData);    
     Cookies.set('username', userData.username, { expires: 7 });
@@ -83,7 +85,7 @@ function auth(form, url){
             },
             body: dataJson
         }).then((data)=>{
-            console.log(data.status);
+            //console.log(data.status);
             if(data.status == 230) {
                 checkData(dataJson);
                 form.reset();
