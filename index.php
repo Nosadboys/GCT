@@ -19,7 +19,6 @@
     else{
         $r->add_route("/", "auth.html");
         $r->add_route("/auth", "auth.html");
-        $r->add_route("/login", "login.html");
     }
    
     $r->route(get_request_page_path());
