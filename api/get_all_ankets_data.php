@@ -7,15 +7,22 @@
     if($_SERVER["REQUEST_METHOD"] == "GET"){
         header("Content-Type: application/json; charset=UTF-8");
         $username = $_SESSION['username']; 
+        $currentDate = date('Y-m-d');
+        $currentDateArray = explode('-', $currentDate);
         $user =  $user_id = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
         $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets WHERE user_id != '$user'")->fetchAll(PDO::FETCH_ASSOC);
         $res = [];        
         foreach ($anket_prof as $row) {              
-            
+            $date_of_birth =  queryMysql("SELECT date_of_birth FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetchColumn();            
+            $birthdayArray = explode('-', $date_of_birth);           
+            $age = $currentDateArray[0] - $birthdayArray[0];    
+            if ($currentDateArray[1] < $birthdayArray[1] || ($currentDateArray[1] == $birthdayArray[1] && $currentDateArray[2] < $birthdayArray[2])) {
+                $age--;
+            }
             $anket = queryMysql("SELECT * FROM ankets WHERE id  = '{$row['anket_id']}'")->fetch(PDO::FETCH_ASSOC);
             $userdat = queryMysql("SELECT username, email FROM users WHERE id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);
-            $profile = queryMysql("SELECT name, surname, country, date_of_birth, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);
-            
+            $profile = queryMysql("SELECT name, surname, country, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);
+            $profile['age'] = $age;
             $res[] = array_merge($anket, $profile, $userdat);
             
         }

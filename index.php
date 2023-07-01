@@ -18,8 +18,7 @@
     }
     else{
         $r->add_route("/", "auth.html");
-        $r->add_route("/auth", "auth.html");
-        $r->add_route("", "auth.html");
+        $r->add_route("/auth", "auth.html");        
     }
    
     $r->route(get_request_page_path());

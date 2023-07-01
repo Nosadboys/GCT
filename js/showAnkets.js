@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     <i class="fa-solid fa-id-badge anket__logo" data-id="${element.id}"></i>
                     <div class="anket__item__more__name">${element.name}</div>
                     <div class="anket__item__more__surname">${element.surname}</div>
-                    <div class="anket__item__more__age">Возраст: 20</div>
+                    <div class="anket__item__more__age">Возраст: ${element.age}</div>
                     <div class="anket__item__more__gender">${element.gender}</div>
                     <div class="anket__item__more__country">${element.country}</div>
                     <div class="anket__item__more__created">
