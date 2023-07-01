@@ -314,7 +314,23 @@
             <div class="anket__form__item">
                 <label for="game_name" class="anket__form__item__header">Название игры:</label>
                 <div class="anket__form__item__wrapper">
-                    <input data-name="game_name" name="game_name" type="text" class="settigns__form__game_name anket__form__input">
+                    <!-- Сделал option -->
+                    <select data-name="game_name" name="game_name" type="text" class="settigns__form__game_name anket__form__input" required>
+                    <option value="" hidden selected>Выберите игру</option>
+                    <option value="APEX Legends">APEX Legends</option>
+                    <option value="CS:GO">CS:GO</option>
+                    <option value="Dota 2">Dota 2</option>
+                    <option value="Escape from Tarkov">Escape from Tarkov</option>
+                    <option value="Garrys Mod">Garrys Mod</option>
+                    <option value="League of Legends">League of Legends</option>
+                    <option value="Lost ARK">Lost ARK</option>
+                    <option value="Minecraft">Minecraft</option>
+                    <option value="Mobile Legends">Mobile Legends</option>
+                    <option value="War Thunder">War Thunder</option>
+                    <option value="Warframe">Warframe</option>
+                    <option value="World of Tanks">World of Tanks</option>
+                    <option value="World of Warcraft">World of Warcraft</option>
+                    </select>
                 </div>     
             </div>
             <div class="anket__form__item">
@@ -345,6 +361,7 @@
                 
             </div>
             <div class="anket__form__item">
+                <!-- Думаю над option -->
                 <label for="age_diap" class="anket__form__item__header">Предпочитаемый возраст:</label>
                 <div class="anket__form__item__wrapper">
                     <input data-name="age_diap" name="age_diap" type="text" class="settigns__form__age_diap anket__form__input">
@@ -353,7 +370,12 @@
             <div class="anket__form__item">
                 <label for="gender_prep" class="anket__form__item__header">Предпочитаемый пол:</label>
                 <div class="anket__form__item__wrapper">
-                    <input data-name="gender_prep" name="gender_prep" type="text" class="settigns__form__gender_prep anket__form__input">
+                    <!-- Сделал option -->
+                    <select data-name="gender_prep" name="gender_prep" type="text" class="settigns__form__gender_prep anket__form__input">
+                    <option value="Не важен">Не важен</option>
+                    <option value="Мужской">Мужской</option>
+                    <option value="Женский">Женский</option> 
+                    </select>
                 </div>
                             
             </div>

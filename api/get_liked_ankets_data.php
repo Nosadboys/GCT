@@ -16,11 +16,7 @@
         $res = [];
         foreach ($anket_prof as $row) {              
             $date_of_birth =  queryMysql("SELECT date_of_birth FROM profiles WHERE user_id  = '{$row['owner_id']}'")->fetchColumn();            
-            $birthdayArray = explode('-', $date_of_birth);           
-            $age = $currentDateArray[0] - $birthdayArray[0];    
-            if ($currentDateArray[1] < $birthdayArray[1] || ($currentDateArray[1] == $birthdayArray[1] && $currentDateArray[2] < $birthdayArray[2])) {
-                $age--;
-            }
+            $age = getAge($date_of_birth, $currentDateArray);
             $anket = queryMysql("SELECT * FROM ankets WHERE id  = '{$row['anket_id']}'")->fetch(PDO::FETCH_ASSOC);
             $userdat = queryMysql("SELECT username, email FROM users WHERE id  = '{$row['owner_id']}'")->fetch(PDO::FETCH_ASSOC);
             $profile = queryMysql("SELECT name, surname, country, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['owner_id']}'")->fetch(PDO::FETCH_ASSOC);

@@ -17,7 +17,9 @@ if (isset($postdata)) {
         $check = queryMysql("SELECT anket_id FROM likes
         WHERE anket_id = '$anket_id' AND owner_id = '$owner_id' AND liker_id = '$liker_id'");
         if ($check -> rowCount()>0){
-            http_response_code(242); // лайк уже поставлен либо тут сделать удалить лайк
+            queryMysql("DELETE anket_id FROM likes
+        WHERE anket_id = '$anket_id' AND owner_id = '$owner_id' AND liker_id = '$liker_id'");
+            http_response_code(237); // лайк уже поставлен либо тут сделать удалить лайк
             die();
         }else{
             queryMysql("INSERT INTO likes(owner_id, anket_id, liker_id) 

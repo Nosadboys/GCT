@@ -96,4 +96,14 @@
               die("236 UNDEFINED_ERROR");
           }
     }
+    function getAge($date_of_birth, $currentDateArray)
+    {
+        $birthdayArray = explode('-', $date_of_birth);
+        $age = $currentDateArray[0] - $birthdayArray[0];
+        if ($currentDateArray[1] < $birthdayArray[1] || ($currentDateArray[1] == $birthdayArray[1] && $currentDateArray[2] < $birthdayArray[2])) {
+            $age--;
+        }
+        return $age;
+    }
+
 ?>

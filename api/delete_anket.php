@@ -13,10 +13,11 @@
         $user_id = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
         $check = queryMysql("SELECT anket_id FROM profileankets
         WHERE anket_id = '$anket_id' AND user_id = '$user_id'");
-         if ($check -> rowCount()>0){
-            queryMysql("DELETE FROM ankets, profileankets
-            WHERE ankets.id = '$anket_id' AND profileankets.anket_id = '$anket_id' 
-            AND profileankets.user_id = '$user_id';");
+         if ($check -> rowCount()>0){            
+            queryMysql("DELETE FROM profileankets WHERE anket_id = '$anket_id'  AND user_id = '$user_id'");
+            queryMysql("DELETE FROM likes WHERE likes.owner_id = '$user_id' AND likes.anket_id = '$anket_id'");
+            queryMysql("DELETE FROM ankets WHERE anket_id = '$anket_id'");
+            
             http_response_code(230); // анкета удалена
             die();
         }else{

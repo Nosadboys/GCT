@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //Create ankets in layout
     function createAnkets(anket){        
         anket.forEach(element => {             
-            // const currentDate = new Date();        
+            // const currentDate = new Date();      Сделал age на сервере  
             // const birth = element.date_of_birth;
             // const age = currentDate.getFullYear() - birth.getFullYear();
             const anketItem = document.createElement("div");
