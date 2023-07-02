@@ -51,7 +51,6 @@ window.addEventListener('DOMContentLoaded', () => {
         .then(res=>res.json()
         )
         .then(jsonData => {
-            console.log(jsonData.status);
             removeAll(anketsLayout);
             createAnkets(jsonData, 'show', 'hide', 'white');            
         })
@@ -88,10 +87,10 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="anket__item__more">
                 <div class="grid-1">
                     <i class="fa-solid fa-id-badge anket__logo" data-id="${element.id}"></i>
-                    <div class="anket__item__more__name">${element.name}</div>
+                    <div class="anket__item__more__name" data-game="${element.name}">${element.name}</div>
                     <div class="anket__item__more__surname">${element.surname}</div>
-                    <div class="anket__item__more__age">Возраст: ${element.age}</div>
-                    <div class="anket__item__more__gender">${element.gender}</div>
+                    <div class="anket__item__more__age" data-age="${element.age}">Возраст: ${element.age}</div>
+                    <div class="anket__item__more__gender" data-gender="${element.gender}">${element.gender}</div>
                     <div class="anket__item__more__country">${element.country}</div>
                     <div class="anket__item__more__created">
                         <div class="anket__item__more__created__header">Анкета создана</div>
@@ -165,7 +164,7 @@ window.addEventListener('DOMContentLoaded', () => {
         deleteAnket();
         likeAnket();
     }
-    openAndCloseAnkets();
+    // openAndCloseAnkets();
     //Open and Close ankets
     function openAndCloseAnkets() {
         const btn1 = document.querySelectorAll('.anket__button');
@@ -179,7 +178,6 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         close.forEach(btn=>{
             btn.addEventListener('click', (e)=>{
-                console.log(e.target.parentElement.parentElement.lastElementChild);
                 e.target.parentElement.parentElement.classList.remove('more');
                 e.target.parentElement.parentElement.parentElement.classList.remove('big');
                 e.target.parentElement.parentElement.parentElement.lastElementChild.classList.remove('hide');
@@ -251,26 +249,17 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         })
     }
-    likeAnket();
-    //Test
-    // const btn1 = document.querySelectorAll('.anket__button');
-    // const close = document.querySelectorAll('.anket__button__close');
-    
-    // btn1.forEach(btn=>{
-    //     btn.addEventListener('click', (e)=>{
-    //         e.target.parentElement.children[1].classList.add('more');
-    //         e.target.parentElement.classList.add('big');
-    //         e.target.classList.add('hide');
-    //     });
-    // })
-    // close.forEach(btn=>{
-    //     btn.addEventListener('click', (e)=>{
-    //         console.log(e.target.parentElement.parentElement.lastElementChild);
-    //         e.target.parentElement.classList.remove('more');
-    //         e.target.parentElement.parentElement.classList.remove('big');
-    //         e.target.parentElement.parentElement.lastElementChild.classList.remove('hide');
-    //     });
-    // })
+    // likeAnket();
+    //Вы понравились 
+    const allMatchAnkets = document.querySelector('.ankets__types__match');
+    allMatchAnkets.addEventListener('click', async (e)=>{
+        await fetch('../api/get_likers_data.php')
+        .then(res => res.json())
+        .then((data)=>{
+            removeAll(anketsLayout);
+            createAnkets(data, 'hide', 'show', 'red');            
+        });
+    });
     
     //Create Anket and Update Layout
     anketa_form.addEventListener('submit', async (e)=>{
@@ -299,6 +288,55 @@ window.addEventListener('DOMContentLoaded', () => {
             
         }).catch(()=>{
             //showError(form);
+        });
+    });
+    
+    //Поиск анкет
+    const searchBtn = document.querySelector('.ankets__search__button');
+    searchBtn.addEventListener('click', (e)=>{
+        const getAllAnkets = document.querySelectorAll('.anket__item');
+        let ageFrom = document.querySelector('.ankets__search__ot__input').value.toLowerCase();
+        let ageTo = document.querySelector('.ankets__search__do__input').value.toLowerCase();
+        const gender = document.querySelector('.ankets__search__gender').value.toLowerCase();
+        const game = document.querySelector('.ankets__search__game').value.toLowerCase();
+        if(ageFrom == ""){
+            ageFrom = 0;
+        }
+        if(ageTo == ""){
+            ageTo = 1000;
+        }
+        getAllAnkets.forEach(item =>{
+            const anketAge = item.querySelector('.anket__item__more__age').getAttribute('data-age').toLowerCase();
+            const anketGender = item.querySelector('.anket__item__more__gender').getAttribute('data-gender').toLowerCase();
+            const anketGame = item.querySelector('.anket__item__game').getAttribute('data-game_name').toLowerCase();
+            item.classList.remove('hidden');
+            if(gender == "не важен" && game == "нет"){
+                if(anketAge <= ageTo && anketAge >= ageFrom) { //только возраст
+                
+                } else {
+                    item.classList.add('hidden');
+                }
+            } else if(gender == "не важен"){
+                if(anketAge <= ageTo && anketAge >= ageFrom && anketGame == game) {
+                
+                } else {
+                    item.classList.add('hidden');
+                }
+            } else if(game == "нет") {
+                if(anketAge <= ageTo && anketAge >= ageFrom && anketGender == gender) {
+                
+                } else {
+                    item.classList.add('hidden');
+                }
+            } else if(game != 'нет' && gender != "не важен") {
+                if(anketAge <= ageTo && anketAge >= ageFrom && anketGender == gender && anketGame == game) {
+                
+                } else {
+                    item.classList.add('hidden');
+                }
+            } else {
+                item.classList.add('hidden');
+            }
         });
     });
 });

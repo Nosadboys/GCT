@@ -56,9 +56,48 @@
                     </div>
                 </div>
                 <div class="ankets__search">
-                    <i class="fa-solid fa-magnifying-glass ankets__search__icon"></i>
-                    <input type="text" class="ankets__search__input" placeholder="поиск анкет">
-                    <button class="ankets__search__button">Найти</button>
+                    <!-- <i class="fa-solid fa-magnifying-glass ankets__search__icon"></i> -->
+                    <!-- <input type="text" class="ankets__search__input" placeholder="поиск анкет">
+                     -->
+                     <div class="grid-a">
+                        <div class="ankets__search_h">Предпочитаемый возраст</div>
+                        <div class="ankets__search__ot">
+                            От:
+                            <input type="text" class="ankets__search__ot__input">
+                         </div>
+                         <div class="ankets__search__do">
+                            До:
+                            <input type="text" class="ankets__search__do__input">
+                         </div>
+                     </div>
+                     <div class="grid-b">
+                        <div class="ankets__search_h">Предпочитаемый пол</div>
+                        <select data-name="gender_prep" name="gender_prep" type="text" class="ankets__search__gender">
+                            <option value="Не важен">Не важен</option>
+                            <option value="Мужской">Мужской</option>
+                            <option value="Женский">Женский</option> 
+                        </select>
+                     </div>
+                     <div class="grid-c">
+                        <div class="ankets__search_h">Предпочитаемая игра</div>
+                        <select class="ankets__search__game" data-name="game_name" name="game_name" type="text" class="settigns__form__game_name anket__form__input" required>
+                            <option value="Нет">Не важно</option>
+                            <option value="APEX Legends">APEX Legends</option>
+                            <option value="CS:GO">CS:GO</option>
+                            <option value="Dota 2">Dota 2</option>
+                            <option value="Escape from Tarkov">Escape from Tarkov</option>
+                            <option value="Garrys Mod">Garrys Mod</option>
+                            <option value="League of Legends">League of Legends</option>
+                            <option value="Lost ARK">Lost ARK</option>
+                            <option value="Minecraft">Minecraft</option>
+                            <option value="Mobile Legends">Mobile Legends</option>
+                            <option value="War Thunder">War Thunder</option>
+                            <option value="Warframe">Warframe</option>
+                            <option value="World of Tanks">World of Tanks</option>
+                            <option value="World of Warcraft">World of Warcraft</option>
+                        </select>
+                     </div>
+                    <button class="ankets__search__button grid-d">Найти</button>
                 </div>
             </div>
             <div class="ankets__manager__layout"> <!-- big_files -->
