@@ -10,7 +10,7 @@
         $currentDate = date('Y-m-d');
         $currentDateArray = explode('-', $currentDate);
         $user = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
-        $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets WHERE user_id != '$user'")->fetchAll(PDO::FETCH_ASSOC);
+        $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets WHERE profileankets.user_id != '$user' AND profileankets.anket_id NOT IN (SELECT anket_id FROM likes WHERE liker_id = '$user')")->fetchAll(PDO::FETCH_ASSOC);
         $res = [];        
         foreach ($anket_prof as $row) {              
             $date_of_birth =  queryMysql("SELECT date_of_birth FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetchColumn();            
