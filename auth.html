@@ -25,11 +25,11 @@
                         </div>
                         <div class="registr__input">
                             <label for="date">Дата рождения</label>
-                            <input type="date" name="date_of_birth" class="birth">
+                            <input type="date" name="date_of_birth"  min="1922-01-01" max="2022-12-01" class="birth">
                         </div>
                         <div class="registr__input">
                             <select name="country" class="country">
-                                <option value="">Укажите вашу страну</option>
+                                <option value="" hidden selected>Укажите вашу страну</option>
                                 <option value="AF">Afghanistan</option>
                                 <option value="AX">Åland Islands</option>
                                 <option value="AL">Albania</option>
@@ -283,7 +283,7 @@
                         </div>
                         <div class="registr__input">
                             <select class="gender"  name="gender" >
-                                <option value="">Укажите ваш пол</option>
+                                <option value="" hidden selected>Укажите ваш пол</option>
                                 <option value="Мужской">Мужской</option>
                                 <option value="Женский">Женский</option>  
                             </select>
