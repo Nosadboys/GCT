@@ -24,18 +24,16 @@
             $date_of_birth =  queryMysql("SELECT date_of_birth FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetchColumn();            
             $age = getAge($date_of_birth, $currentDateArray);
             
-            if ((!empty($age_min) && $age < $age_min) || (!empty($age_max) && $age > $age_max)) {
+            if ((empty($age_min) && $age < $age_min && $age_min == "" ) || (empty($age_max) && $age > $age_max && $age_max == "")) {
                 // Пропускаем анкету, если возраст не удовлетворяет условию
                 continue;
             }
 
             $conditions = array(); //  массив для условий
-            if (!empty($game_name)) {
+            if (!empty($game_name) && $game_name != "") {
                 $conditions[] = "game_name = '$game_name'";
             }
-            if (!empty($gender_prep)) {
-                $conditions[] = "gender_prep = '$gender_prep'";
-            }
+           
 
             $whereClause = ""; // Инициализация пустой строки для WHERE-условия
             if (!empty($conditions)) {
@@ -47,7 +45,11 @@
                 
                 $anket = queryMysql("SELECT * FROM ankets WHERE id  = '{$row['anket_id']}'")->fetch(PDO::FETCH_ASSOC);
                 $userdat = queryMysql("SELECT username, email FROM users WHERE id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);
-                $profile = queryMysql("SELECT name, surname, country, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);
+                if (!empty($gender_prep) && $gender_prep != "") {
+                    $profile = queryMysql("SELECT name, surname, country, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['user_id']}' AND gender = '$gender_prep'")->fetch(PDO::FETCH_ASSOC);
+                }
+                else{$profile = queryMysql("SELECT name, surname, country, gender, bio, game_platforms, discord_url, platforms_url FROM profiles WHERE user_id  = '{$row['user_id']}'")->fetch(PDO::FETCH_ASSOC);}
+                
                 $profile['age'] = $age;
                 $res[] = array_merge($anket, $profile, $userdat);
             }
