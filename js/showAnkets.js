@@ -15,13 +15,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 'Content-type': 'application/json'
             }
         }).then(res=> res.json()).then(anket=>{              
-            createAnkets(anket);
+            createAnkets(anket, 'hide', 'show', 'white');
             
         }).catch(()=>{
         });
     }    
     //Calling all Ankets form the server
-    getAnkets();
+     getAnkets();
     //Remove all ankets from layout
     function removeAll(element) {
         while (element.firstChild) {
@@ -49,31 +49,34 @@ window.addEventListener('DOMContentLoaded', () => {
             body: usernameJson
         })
         .then(res=>res.json()
-            // if(res.status == 230){
-            //     console.log('ok');
-            //     res.json();
-            //     removeAll(anketsLayout);
-            // } else {
-            //     throw new Error();
-            // }
         )
         .then(jsonData => {
             console.log(jsonData.status);
             removeAll(anketsLayout);
-            createAnkets(jsonData);            
+            createAnkets(jsonData, 'show', 'hide', 'white');            
         })
         .catch(()=>{
             console.log('error');
         });
     }
-
-
+    //Liked ankets show
+    const likedAnketsBtn = document.querySelector('.ankets__types__liked');
+    likedAnketsBtn.addEventListener('click', ()=>{
+        likedAnkets();
+    });
+    //Get liked anket
+    async function likedAnkets(){
+        await fetch('../api/get_liked_ankets_data.php')
+        .then(res => res.json())
+        .then((data)=>{
+            removeAll(anketsLayout);
+            createAnkets(data, 'hide', 'show', 'red');            
+        });
+        
+    }
     //Create ankets in layout
-    function createAnkets(anket){        
+    function createAnkets(anket, classForDelete, classForLike, colorForLike){        
         anket.forEach(element => {             
-            // const currentDate = new Date();      Сделал age на сервере  
-            // const birth = element.date_of_birth;
-            // const age = currentDate.getFullYear() - birth.getFullYear();
             const anketItem = document.createElement("div");
             anketItem.classList.add('anket__item');
             anketItem.innerHTML = 
@@ -148,19 +151,25 @@ window.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>
-                <button class="anket__button__close grid-6">Скрыть анкету</button>
+                <div class="anket__button__wrapper grid-6">
+                    <button class="anket__button__delete ${classForDelete}">Удалить анкету</button>
+                    <button class="anket__button__close">Скрыть анкету</button>
+                    <i class="fa-solid fa-heart anket__button__like ${classForLike} ${colorForLike}"></i>
+                </div>
             </div>
             <button class="anket__button">Показать больше</button>
             `;            
             anketsLayout.insertAdjacentElement('beforeend', anketItem);
         });
         openAndCloseAnkets();
+        deleteAnket();
+        likeAnket();
     }
+    openAndCloseAnkets();
     //Open and Close ankets
     function openAndCloseAnkets() {
         const btn1 = document.querySelectorAll('.anket__button');
         const close = document.querySelectorAll('.anket__button__close');
-    
         btn1.forEach(btn=>{
             btn.addEventListener('click', (e)=>{
                 e.target.parentElement.children[1].classList.add('more');
@@ -171,13 +180,78 @@ window.addEventListener('DOMContentLoaded', () => {
         close.forEach(btn=>{
             btn.addEventListener('click', (e)=>{
                 console.log(e.target.parentElement.parentElement.lastElementChild);
-                e.target.parentElement.classList.remove('more');
-                e.target.parentElement.parentElement.classList.remove('big');
-                e.target.parentElement.parentElement.lastElementChild.classList.remove('hide');
+                e.target.parentElement.parentElement.classList.remove('more');
+                e.target.parentElement.parentElement.parentElement.classList.remove('big');
+                e.target.parentElement.parentElement.parentElement.lastElementChild.classList.remove('hide');
             });
         })
     };
+    //Delete anket
+    function deleteAnket(){
+        const allDeleteBtns = document.querySelectorAll('.anket__button__delete');
+        allDeleteBtns.forEach(btn => {
+            btn.addEventListener('click', async (e)=>{
+                const anketId = e.target.parentElement.parentElement.firstElementChild.firstElementChild.getAttribute('data-id');
+                console.log(anketId);
+                const anket = e.target.parentElement.parentElement.parentElement;
+                const dataId = new FormData();
+                dataId.append('id', anketId);
+                const dataIdJson = JSON.stringify(Object.fromEntries(dataId.entries()));
+                await fetch('../api/delete_anket.php', {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: dataIdJson
+                })
+                .then(resp => {
+                    if(resp.status == 230){
+                        anket.remove();
+                    } else {
+                        throw new Error();
+                    }
+                }).catch(()=>{
+                    alert('что то пошло не так');
+                });
 
+            });
+        });
+    };
+    // deleteAnket();
+    //Лайк на анкету
+    function likeAnket(){
+        const allLikeBtns = document.querySelectorAll('.anket__button__like');
+        allLikeBtns.forEach(btn => {
+            btn.addEventListener('click', async (e)=>{
+                const id = e.target.parentElement.parentElement.firstElementChild.firstElementChild.getAttribute('data-id');
+                const data = new FormData();
+                data.append('id',id);
+                const IdJson = JSON.stringify(Object.fromEntries(data.entries()));
+                await fetch('../api/like.php', {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: IdJson
+                })
+                .then(resp => {
+                    if(resp.status == 230){
+                        btn.classList.remove('white');
+                        btn.classList.add('red');
+                    } else if(resp.status == 237){
+                        btn.classList.remove('red');
+                        btn.classList.add('white');
+                        
+                    } else {
+                        throw new Error();
+                    }
+                }).catch(()=>{
+                    alert('Возможно анкета удалена');
+                });
+            });
+        })
+    }
+    likeAnket();
     //Test
     // const btn1 = document.querySelectorAll('.anket__button');
     // const close = document.querySelectorAll('.anket__button__close');

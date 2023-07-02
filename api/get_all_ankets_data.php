@@ -9,7 +9,7 @@
         $username = $_SESSION['username']; 
         $currentDate = date('Y-m-d');
         $currentDateArray = explode('-', $currentDate);
-        $user =  $user_id = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
+        $user = queryMysql("SELECT id FROM users WHERE username = '$username'")->fetchColumn();
         $anket_prof = queryMysql("SELECT anket_id, user_id FROM profileankets WHERE user_id != '$user'")->fetchAll(PDO::FETCH_ASSOC);
         $res = [];        
         foreach ($anket_prof as $row) {              

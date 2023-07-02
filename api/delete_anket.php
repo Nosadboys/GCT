@@ -16,7 +16,7 @@
          if ($check -> rowCount()>0){            
             queryMysql("DELETE FROM profileankets WHERE anket_id = '$anket_id'  AND user_id = '$user_id'");
             queryMysql("DELETE FROM likes WHERE likes.owner_id = '$user_id' AND likes.anket_id = '$anket_id'");
-            queryMysql("DELETE FROM ankets WHERE anket_id = '$anket_id'");
+            queryMysql("DELETE FROM ankets WHERE id = '$anket_id'");
             
             http_response_code(230); // анкета удалена
             die();
